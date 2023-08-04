@@ -23,8 +23,9 @@ def message(payload):
 class Check(Resource):
   def post(self):
       print(request.json['question'])
-      r=requests.post('  https://f9c3-202-8-112-91.ngrok-free.app/Ai/askQuestion', json ={'question':request.json['question']})
+     # r=requests.post('  https://f9c3-202-8-112-91.ngrok-free.app/Ai/askQuestion', json ={'question':request.json['question']})
       # print(r.json()['answer'])
+      client.chat_postMessage(channel='#gopro', text='hello')
       return {'message':'success'}
 
 api.add_resource(Check,'/get')
