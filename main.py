@@ -13,8 +13,8 @@ client =slack.WebClient(token='xoxb-5674230910401-5664059319844-aojoIoBknya7Lgal
 class Check(Resource):
   def post(self):
       print(request.json['question'])
-      r=requests.post('http://127.0.0.1:8000/Ai/askQuestion', json ={'question':request.json['question']})
-      print(r.json()['answer'])
+      r=requests.post('  https://f9c3-202-8-112-91.ngrok-free.app/Ai/askQuestion', json ={'question':request.json['question']})
+      # print(r.json()['answer'])
       return {'message':'success'}
 
 api.add_resource(Check,'/get')
