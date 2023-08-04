@@ -10,6 +10,16 @@ slack_event_api = SlackEventAdapter('e435a3403c117be73a76c7588aa5aaaa' , '/slack
 
 client =slack.WebClient(token='xoxb-5674230910401-5664059319844-aojoIoBknya7Lgal7hXfj6eh')
 
+@slack_event_api.on('message')
+def message(payload):
+    event = payload.get('event',{})
+    channel_id = event.get('channel')
+    user_id = event.get('user')
+    text = event.get('text')
+    client.chat_postMessage(channel=channel_id,text=text)
+
+
+
 class Check(Resource):
   def post(self):
       print(request.json['question'])
