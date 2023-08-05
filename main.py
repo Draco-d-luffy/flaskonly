@@ -1,14 +1,20 @@
 import slack
 import requests
+from dotenv import load_dotenv
+import os
 from flask import Flask, request, Response
 from slackeventsapi import SlackEventAdapter
 from flask_restful import Api,Resource
+load_dotenv('.env')
+slack_web_token=os.getenv('SLACK_WEB_TOKEN')
+slcak_signing_secret = os.getenv('SLACK_SIGNING_SECREAT')
+print(slack_web_token)
 app = Flask(__name__)
 api =Api(app)
-slack_event_api = SlackEventAdapter('6e759bbe36cd3532205c0729cd53e1a5' , '/slack/events', app)
+slack_event_api = SlackEventAdapter(slcak_signing_secret , '/slack/events', app)
 #k
 
-client =slack.WebClient(token='xoxb-5679288130871-5693863167794-ppzuG4iELTfp2JIaJB7FkrxX')
+client =slack.WebClient(token=slack_web_token)
 
 # @slack_event_api.on('message')
 # def message(payload):
