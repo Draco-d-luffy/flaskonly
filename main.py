@@ -16,15 +16,15 @@ slack_event_api = SlackEventAdapter(slcak_signing_secret , '/slack/events', app)
 
 client =slack.WebClient(token=slack_web_token)
 
-# @slack_event_api.on('message')
-# def message(payload):
-#     event = payload.get('event',{})
-#     channel_id = event.get('channel')
-#     user_id = event.get('user')
-#
-#     text = event.get('text')
-#     print(text)
-#     client.chat_postMessage(channel=channel_id,text=text)
+@slack_event_api.on('message')
+def message(payload):
+    event = payload.get('event',{})
+    channel_id = event.get('channel')
+    user_id = event.get('user')
+
+    text = event.get('text')
+    print(text)
+    client.chat_postMessage(channel=channel_id,text=text)
 
 
 
