@@ -15,7 +15,7 @@ slack_event_api = SlackEventAdapter(slcak_signing_secret , '/slack/events', app)
 #k
 
 client =slack.WebClient(token=slack_web_token)
-
+BOT_ID = client.api_call("auth.test")['user_id']
 @slack_event_api.on('message')
 def message(payload):
     event = payload.get('event',{})
@@ -24,7 +24,10 @@ def message(payload):
 
     text = event.get('text')
     print(text)
-    client.chat_postMessage(channel=channel_id,text=text)
+    if BOT_ID != user_id:
+        r = requests.post('   https://6b8b-202-8-112-91.ngrok-free.app/Ai/askQuestion',
+                          json={'question': text})
+        client.chat_postMessage(channel=channel_id,text=r.json()['answer'])
 
 
 
